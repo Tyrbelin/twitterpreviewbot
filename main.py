@@ -27,18 +27,20 @@ class MyClient(discord.Client):
             
         if message.content.startswith("http://x.com/"):
             await message.channel.send('{0.author.mention} https://vxtwitter.com/'.format(message) + message.content[13:])
+            await message.delete()
 
         elif message.content.startswith("https://x.com/"):
             await message.channel.send('{0.author.mention} https://vxtwitter.com/'.format(message) + message.content[14:])
+            await message.delete()
 
         elif message.content.startswith("http://twitter.com/"):
             await message.channel.send('{0.author.mention} https://vxtwitter.com/'.format(message) + message.content[19:])
+            await message.delete()
 
         elif message.content.startswith("https://twitter.com/"):
             await message.channel.send('{0.author.mention} https://vxtwitter.com/'.format(message) + message.content[20:])
-
-        await message.delete()
-
+            await message.delete()
+     
 # Run Flask in a separate thread
 flask_thread = Thread(target=run_flask)
 flask_thread.start()
