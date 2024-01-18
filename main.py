@@ -12,7 +12,7 @@ def health_check():
 def run_flask():
     app.run(host='0.0.0.0', port=8080)
 
-TOKEN = os.environ.get("DISCORD_TOKEN").strip()
+TOKEN = os.environ.get("DISCORD_TOKEN")
 print('token : ' + TOKEN)
 
 intents = discord.Intents.default()
