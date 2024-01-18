@@ -1,7 +1,8 @@
 import discord
 import os
  
-print(os.getenv('DISCORD_TOKEN'))
+TOKEN = os.environ.get(f"DISCORD_TOKEN").strip()
+print('token : ' + TOKEN)
 
 class MyClient(discord.Client): 
     async def on_message(self, message):
@@ -21,6 +22,6 @@ class MyClient(discord.Client):
             await message.channel.send('{0.author.mention} https://vxtwitter.com/'.format(message) + message.content[20:])
 
 intents = discord.Intents.default()
-intents.message_content = True
 client = MyClient(intents=intents)
-client.run(os.getenv('DISCORD_TOKEN'))
+intents.messages = True
+client.run(TOKEN)
