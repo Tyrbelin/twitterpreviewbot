@@ -1,2 +1,1 @@
-worker: python main.py
-web: yarn start:production
+web: python main.py
