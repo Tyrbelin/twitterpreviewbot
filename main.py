@@ -15,6 +15,9 @@ def run_flask():
 TOKEN = os.environ.get("DISCORD_TOKEN").strip()
 print('token : ' + TOKEN)
 
+intents = discord.Intents.default()
+intents.messages = True
+
 class MyClient(discord.Client): 
     async def on_message(self, message):
         if message.author == self.user:
@@ -32,9 +35,7 @@ class MyClient(discord.Client):
         elif message.content.startswith("https://twitter.com/"):
             await message.channel.send('{0.author.mention} https://vxtwitter.com/'.format(message) + message.content[20:])
 
-intents = discord.Intents.default()
 client = MyClient(intents=intents)
-intents.messages = True
 
 # Run Flask in a separate thread
 flask_thread = Thread(target=run_flask)
