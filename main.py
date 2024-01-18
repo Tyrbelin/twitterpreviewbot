@@ -1,16 +1,18 @@
 import discord
 import os
 from flask import Flask
+from threading import Thread
 
 app = Flask(__name__)
+
 @app.route('/health', methods=['GET'])
 def health_check():
     return '', 200
 
-if __name__ == '__main__':
+def run_flask():
     app.run(host='0.0.0.0', port=8080)
 
-TOKEN = os.environ.get(f"DISCORD_TOKEN").strip()
+TOKEN = os.environ.get("DISCORD_TOKEN").strip()
 print('token : ' + TOKEN)
 
 class MyClient(discord.Client): 
@@ -33,4 +35,10 @@ class MyClient(discord.Client):
 intents = discord.Intents.default()
 client = MyClient(intents=intents)
 intents.messages = True
+
+# Run Flask in a separate thread
+flask_thread = Thread(target=run_flask)
+flask_thread.start()
+
+# Run Discord bot in the main thread
 client.run(TOKEN)
