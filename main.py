@@ -15,9 +15,6 @@ def run_flask():
 TOKEN = os.environ.get("DISCORD_TOKEN")
 print('token : ' + TOKEN)
 
-intents = discord.Intents.default()
-intents.messages = True
-
 class MyClient(discord.Client): 
     async def on_message(self, message):
         if message.author == self.user:
@@ -29,26 +26,23 @@ class MyClient(discord.Client):
             print("메시지 내용 없음")
             
         if message.content.startswith("http://x.com/"):
-            await message.delete()
             await message.channel.send('{0.author.mention} https://vxtwitter.com/'.format(message) + message.content[13:])
 
         elif message.content.startswith("https://x.com/"):
-            await message.delete()
             await message.channel.send('{0.author.mention} https://vxtwitter.com/'.format(message) + message.content[14:])
 
         elif message.content.startswith("http://twitter.com/"):
-            await message.delete()
             await message.channel.send('{0.author.mention} https://vxtwitter.com/'.format(message) + message.content[19:])
 
         elif message.content.startswith("https://twitter.com/"):
-            await message.delete()
             await message.channel.send('{0.author.mention} https://vxtwitter.com/'.format(message) + message.content[20:])
-
-client = MyClient(intents=intents)
 
 # Run Flask in a separate thread
 flask_thread = Thread(target=run_flask)
 flask_thread.start()
 
 # Run Discord bot in the main thread
+intents = discord.Intents.default()
+intents.message_content = True
+client = MyClient(intents=intents)
 client.run(TOKEN)
