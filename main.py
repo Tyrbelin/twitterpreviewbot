@@ -37,6 +37,8 @@ class MyClient(discord.Client):
         elif message.content.startswith("https://twitter.com/"):
             await message.channel.send('{0.author.mention} https://vxtwitter.com/'.format(message) + message.content[20:])
 
+        await message.delete()
+
 # Run Flask in a separate thread
 flask_thread = Thread(target=run_flask)
 flask_thread.start()
