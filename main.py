@@ -22,7 +22,12 @@ class MyClient(discord.Client):
     async def on_message(self, message):
         if message.author == self.user:
             return
-        print(message.content)
+        
+        if message.content:
+            print(message.content)
+        else:
+            print("메시지 내용 없음")
+            
         if message.content.startswith("http://x.com/"):
             await message.delete()
             await message.channel.send('{0.author.mention} https://vxtwitter.com/'.format(message) + message.content[13:])
