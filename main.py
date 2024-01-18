@@ -26,20 +26,20 @@ class MyClient(discord.Client):
             print("메시지 내용 없음")
             
         if message.content.startswith("http://x.com/"):
+            await message.delete()
             await message.channel.send('{0.author.mention} https://vxtwitter.com/'.format(message) + message.content[13:])
-            await message.delete()
-
+            
         elif message.content.startswith("https://x.com/"):
+            await message.delete()
             await message.channel.send('{0.author.mention} https://vxtwitter.com/'.format(message) + message.content[14:])
-            await message.delete()
-
+            
         elif message.content.startswith("http://twitter.com/"):
+            await message.delete()
             await message.channel.send('{0.author.mention} https://vxtwitter.com/'.format(message) + message.content[19:])
-            await message.delete()
-
+            
         elif message.content.startswith("https://twitter.com/"):
-            await message.channel.send('{0.author.mention} https://vxtwitter.com/'.format(message) + message.content[20:])
             await message.delete()
+            await message.channel.send('{0.author.mention} https://vxtwitter.com/'.format(message) + message.content[20:])
      
 # Run Flask in a separate thread
 flask_thread = Thread(target=run_flask)
