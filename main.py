@@ -1,7 +1,7 @@
 import discord
 import os
  
-TOKEN = os.environ.get('token')
+TOKEN = os.environ.get("TOKEN")
 
 class MyClient(discord.Client): 
     async def on_message(self, message):
