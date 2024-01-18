@@ -23,13 +23,13 @@ class MyClient(discord.Client):
         if message.content.startswith("http://x.com/"):
             await message.channel.send('{0.author.mention} https://vxtwitter.com/'.format(message) + message.content[13:])
 
-        if message.content.startswith("https://x.com/"):
+        elif message.content.startswith("https://x.com/"):
             await message.channel.send('{0.author.mention} https://vxtwitter.com/'.format(message) + message.content[14:])
 
-        if message.content.startswith("http://twitter.com/"):
+        elif message.content.startswith("http://twitter.com/"):
             await message.channel.send('{0.author.mention} https://vxtwitter.com/'.format(message) + message.content[19:])
 
-        if message.content.startswith("https://twitter.com/"):
+        elif message.content.startswith("https://twitter.com/"):
             await message.channel.send('{0.author.mention} https://vxtwitter.com/'.format(message) + message.content[20:])
 
 intents = discord.Intents.default()
